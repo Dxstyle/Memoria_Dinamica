@@ -1,9 +1,9 @@
-# Memoria_Dinamica
-Ejercicios vistos en clase en las cuales se empieza a utilizar la memoria dinamica
+/*# Memoria_Dinamica
+Ejercicios vistos en clase en las cuales se empieza a utilizar la memoria dinamica*/
 
 #include <stdio.h>
 #include <stdlib.h>
-int cont, head;
+int cont, head;     //Se declaran dos variable que sera contador y el otro el máximo de elementos
 struct NODO{
 	char dato;
 	struct NODO *siguiente;
