@@ -1,0 +1,113 @@
+# Memoria_Dinamica
+Ejercicios vistos en clase en las cuales se empieza a utilizar la memoria dinamica
+
+#include <stdio.h>
+#include <stdlib.h>
+int cont, head;
+struct NODO{
+	char dato;
+	struct NODO *siguiente;
+	};
+
+struct PILA{
+	struct NODO *tope;
+	};
+
+void Inicializa(struct PILA *pila){
+	pila->tope=NULL;
+	}
+
+void Muestra(struct PILA *pila){
+	if(pila->tope==NULL){
+		printf("Pila vacia\n");
+		}
+	else{
+		struct NODO *actual;
+		actual = pila->tope;
+		printf("\nPila: ");
+		do{
+			printf("\n | %c |",actual->dato);
+			actual=actual->siguiente;
+			}
+		while(actual!=NULL);
+		printf("\n");
+	}
+}
+
+int Push(struct PILA *pila, char a){
+if(cont<head){cont++;
+	struct NODO *nodo;
+	nodo = (struct NODO*)malloc(sizeof(nodo));
+	if(nodo!=NULL){
+		nodo->siguiente=pila->tope;
+		pila->tope=nodo;
+		nodo->dato=a;
+		return 1;
+	}
+}
+	else{
+	return 0;
+	}
+}
+
+char Pop(struct PILA *pila){
+if(cont>0){cont--;
+	if(pila->tope!=NULL){
+		char ctemporal;
+		ctemporal=pila->tope->dato;
+		struct NODO *stTemporal;
+		stTemporal=pila->tope;
+		pila->tope = pila->tope->siguiente;
+		free(stTemporal);
+		return ctemporal;
+		}
+}
+else{
+	return '\0';
+	}
+}
+
+int main (){
+	struct PILA mi_pila;
+	struct PILA *p;
+	p=&mi_pila;
+	int TAM;
+	printf("Ingresa tu maximo de elementos:  ");
+	scanf("%d",&TAM);
+	head=TAM;
+	Inicializa(p);
+	printf("\n\nEstado inicial de la pila:\t"); 
+	Muestra(p);
+	int OpcionMenu;
+	do{
+		printf("\nOpciones:\n1 Agregar nuevo elemento\n2 Quitar un elemento\n3 Salir\nDame una opcion: ");
+		scanf("%i",&OpcionMenu);
+		if(OpcionMenu==1){
+			int Exito;
+			char Letra;
+			printf("Dame una letra: ");
+			scanf(" %c",&Letra);
+			Exito=Push(p,Letra);
+			if(Exito==1){
+				printf("\n\t**Se puso la letra %c en el tope de la pila",Letra);
+				}
+			else{
+				printf("\n\t**No se agrego la letra %c porque la pila esta llena**",Letra);
+				}
+			Muestra(p);
+			}
+		if(OpcionMenu==2){
+			char Letra;
+			Letra=Pop(p);
+			if(Letra!='\0'){	
+				printf("\n\t**Se saco la letra %c del tope de la pila**",Letra);
+				}	
+			else{
+				printf("\n\t**No se saco ningun elemento de la pila porque esta vacia**");
+			}
+			Muestra(p);
+		}
+	}
+	while(OpcionMenu==1 || OpcionMenu==2); 
+	return 0;
+}
